@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { baseImgUrl, baseUrl } from '../Utils/baseUrl';
 import { apiKey } from '../Utils/apiKey';
 import { Breadcrumb } from '../Components/Breadcrumb';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 export const Detail = () => {
@@ -15,7 +16,6 @@ export const Detail = () => {
   const getMoviebyId = () => {
     axios.get(`${baseUrl}/movie/${id}?api_key=${apiKey}`).then((response) => {
       setMovieDetail(response.data);
-      console.log(response.data);
       setGenre(response.data.genres);
       if (response.data.vote_average < 3) {
         setPrice('3.500');
@@ -42,10 +42,10 @@ export const Detail = () => {
   useEffect(() => {
     getMoviebyId();
     getSimilarMovie();
-  }, []);
+  }, [getMoviebyId()]);
 
   return (
-    <div className='h-svh container max-w-screen-2xl px-6 mx-auto mt-6'>
+    <div className='h-max sm:h-full container max-w-screen-2xl px-6 mx-auto mt-6 pb-20'>
       <Breadcrumb props={movieDetail} />
       <div className='sm:flex mt-4'>
         <img
@@ -104,23 +104,29 @@ export const Detail = () => {
           </p>
           <div className='grid grid-cols-1 sm:grid-cols-4 justify-items-center sm:justify-items-start'>
             {similarMovie.map((similarMovie) => (
-              <div className='mt-4 w-64 sm:w-48 bg-white border border-gray-200 rounded-lg shadow'>
-                <a href='#'>
-                  <img
-                    className='rounded-t-lg w-80 h-64'
-                    src={`${baseImgUrl}/${similarMovie.poster_path}`}
-                    alt=''
-                  />
-                </a>
-                <div className='p-2'>
+              <Link
+                to={`/detail/${similarMovie.id}/${String(
+                  similarMovie.original_title
+                ).replace(/\s+/g, '-')}`}
+              >
+                <div className='mt-4 w-64 sm:w-48 bg-white border border-gray-200 rounded-lg shadow'>
                   <a href='#'>
-                    <h5 className='text-md text-center font-bold tracking-tight text-gray-900'>
-                      {similarMovie.original_title} (
-                      {String(similarMovie.release_date).substring(0, 4)})
-                    </h5>
+                    <img
+                      className='rounded-t-lg w-80 h-64'
+                      src={`${baseImgUrl}/${similarMovie.poster_path}`}
+                      alt=''
+                    />
                   </a>
+                  <div className='p-2'>
+                    <a href='#'>
+                      <h5 className='text-md text-center font-bold tracking-tight text-gray-900'>
+                        {similarMovie.original_title} (
+                        {String(similarMovie.release_date).substring(0, 4)})
+                      </h5>
+                    </a>
+                  </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

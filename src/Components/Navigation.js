@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const Navigation = () => {
   const [openSearch, isOpenSearch] = useState(false);
-  const navigate = useNavigate();
 
   return (
     <nav className='bg-white border-gray-200 dark:bg-gray-900'>
@@ -12,9 +11,6 @@ export const Navigation = () => {
           <a
             href='https://flowbite.com/'
             className='flex items-center space-x-3 rtl:space-x-reverse'
-            // onClick={() => {
-            //   navigate('/');
-            // }}
           >
             <span className='self-center text-2xl font-semibold whitespace-nowrap dark:text-white'>
               Streamfix
@@ -89,7 +85,7 @@ export const Navigation = () => {
               type='text'
               id='search-navbar'
               className='block w-full p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
-              placeholder='Searchsss...'
+              placeholder='Search...'
             />
           </div>
           {/* <button

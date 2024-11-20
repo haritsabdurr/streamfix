@@ -11,11 +11,9 @@ export const Homepage = () => {
   const [pageNumber, setPageNumber] = useState(1);
 
   const getAllMovieData = () => {
-    axios
-      .get(`${baseUrl}/movie/popular?api_key=${apiKey}&page=${pageNumber}`)
-      .then((response) => {
-        setMovieData(response.data.results);
-      });
+    axios.get(`${baseUrl}/movie/popular?api_key=${apiKey}`).then((response) => {
+      setMovieData(response.data.results);
+    });
   };
 
   const nextPage = () => {
@@ -30,7 +28,7 @@ export const Homepage = () => {
   const previousPage = () => {
     if (pageNumber >= 2) {
       setPageNumber(pageNumber - 1);
-    } else {
+    } else if (pageNumber === 1) {
       setPageNumber(pageNumber - 0);
     }
     axios
@@ -42,7 +40,6 @@ export const Homepage = () => {
 
   useEffect(() => {
     getAllMovieData();
-    console.log(pageNumber);
   }, []);
 
   return (
