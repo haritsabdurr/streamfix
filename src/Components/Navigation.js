@@ -1,19 +1,27 @@
 import { useState } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 
 export const Navigation = () => {
   const [openSearch, isOpenSearch] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <nav className='bg-white border-gray-200 dark:bg-gray-900'>
       <div className='container max-w-screen-2xl px-6 flex flex-wrap items-center justify-between mx-auto p-4'>
-        <a
-          href='https://flowbite.com/'
-          className='flex items-center space-x-3 rtl:space-x-reverse'
-        >
-          <span className='self-center text-2xl font-semibold whitespace-nowrap dark:text-white'>
-            Streamfix
-          </span>
-        </a>
+        <Link to={`/`}>
+          <a
+            href='https://flowbite.com/'
+            className='flex items-center space-x-3 rtl:space-x-reverse'
+            // onClick={() => {
+            //   navigate('/');
+            // }}
+          >
+            <span className='self-center text-2xl font-semibold whitespace-nowrap dark:text-white'>
+              Streamfix
+            </span>
+          </a>
+        </Link>
+
         <div className='flex md:order-2'>
           <button
             type='button'

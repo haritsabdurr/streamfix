@@ -33,8 +33,9 @@ export const MovieCard = ({ props }) => {
           />
         </a>
         <div className='p-5'>
-          <h5 className='pb-4 sm:pb-0 sm:h-[64px] text-xl text-center font-bold tracking-tight text-gray-900'>
-            {props.original_title}
+          <h5 className='pb-4 sm:pb-0 sm:h-[64px] text-xl text-center line-clamp-2 font-bold tracking-tight text-gray-900'>
+            {props.original_title} ({String(props.release_date).substring(0, 4)}
+            )
           </h5>
 
           <p className='mb-3 font-normal text-gray-700 dark:text-gray-400'>
